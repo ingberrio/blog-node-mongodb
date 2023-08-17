@@ -1,0 +1,20 @@
+<%- include("partials/header"); -%>
+</br>
+<h1>Home</h1>
+<div class="container d-flex flex-wrap align-items-center gap-3 ">
+  
+    <% posts.forEach(function(post){ %>  
+      <div class="card text-bg-light mb-3 flex-sm-fill" style="width: 20rem;"> 
+        <div class="card-header"><%=post.title%></div>
+        <div class="card-body">
+          <p class="card-text"><small class="text-body-secondary">Wed 12 2023</small></p>
+          <p class="card-text"><%=post.content.slice(0, 50) + " ..."%></p>
+          <p class="card-text"><a href="/posts/<%=post.title%>">Read More</a></p>
+        </div>
+      </div>  
+    <% }) %>
+  
+</div> 
+
+     
+<%- include("partials/footer"); -%>
