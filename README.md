@@ -4,6 +4,8 @@
 
 This is a simple Express.js blog app that utilizes MongoDB to store and display posts.
 
+# Go online
+
 ## Prerequisites
 
 - Node.js and npm installed on your system.

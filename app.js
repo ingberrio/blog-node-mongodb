@@ -4,9 +4,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const config = require('./config');
-const dotenv = require('dotenv')
-dotenv.config({path:__dirname+'/.env'});
-const { MONGODB_URL } = process.env
+require('dotenv').config();
+const { MONGODB_URL, LOCAL_DB } = process.env
 var _ = require('lodash');
 
 
@@ -33,7 +32,8 @@ const item2 = new Post({
 })
 let posts = [item1, item2];
 
-mongoose.connect( "mongodb://127.0.0.1:27017/blogDB", {
+//Mongoose use enviroment variables to connect create a .env
+mongoose.connect( LOCAL_DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
