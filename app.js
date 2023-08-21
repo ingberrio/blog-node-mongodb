@@ -33,7 +33,7 @@ const item2 = new Post({
 let posts = [item1, item2];
 
 //Mongoose use enviroment variables to connect create a .env
-mongoose.connect( LOCAL_DB, {
+mongoose.connect( MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
