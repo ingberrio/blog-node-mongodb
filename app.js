@@ -33,7 +33,7 @@ const item2 = new Post({
 let posts = [item1, item2];
 
 //Mongoose use enviroment variables to connect create a .env
-mongoose.connect( MONGODB_URL, {
+mongoose.connect( LOCAL_DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -83,11 +83,12 @@ mongoose.connect( MONGODB_URL, {
   });
 
   app.post("/compose", async function(req, res){
-    try {
-      const titleItem = req.body.postTitle;
-      const contentItem = req.body.postBody;
+    
+      const titleItem = _.capitalize(req.body.postTitle);
+      let contentItem = req.body.postBody;
       const dateItem = Date.now();
-
+      console.log(titleItem + " - " + contentItem);
+    try {
       await Post.create({
         title: titleItem, 
         content: contentItem, 
@@ -102,18 +103,21 @@ mongoose.connect( MONGODB_URL, {
     }
   });
 
-  app.get("/posts/:postName", async function(req, res){
-    try {
-      const requestedTitle = _.capitalize(req.params.postName);
-      
-      const posts = await Post.findOne({title: requestedTitle});
-      
-      res.render("post", {title: posts.title, content: posts.content});
-    } catch(error){
-      console.error("Error showing post:", error);
-      res.status(500).send("Internal Server Error");
-    }
-     
-
+  app.get("/posts/:postName", async function(req, res) {
+      try {
+          const requestedTitle = _.capitalize(req.params.postName);
+          const post = await Post.findOne({ title: requestedTitle });
+  
+          if (!post) {
+              return res.status(404).send("Post not found");
+          }
+  
+          console.log(post);
+          res.render("post", { titlePost: post.title, content: post.content });
+      } catch (error) {
+          console.error("Error showing post:", error);
+          res.status(500).send("Internal Server Error");
+      }
   });
+  
 
