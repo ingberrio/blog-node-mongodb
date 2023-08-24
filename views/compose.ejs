@@ -1,18 +1,8 @@
 
-<%- include("partials/header"); -%>
-    <h1 class="mt-5 mb-3"><%= listTitle  %></h1>
-    <!-- <% if (locals.newListItems) {%>
-      <% newListItems.forEach(function(newListItems){ %>
-        <ul>
-          <li>
-            <h3><%= newListItems.title %></h3>
-            <% if (newListItems.content)  {%>
-              <p><%= newListItems.content.slice(0, 30) %></p>
-            <% } %>
-          </li>
-        </ul>
-      <% }) %>
-    <%}%> -->
+<%- include("partials/header", { authenticated: isAuthenticated }); -%>
+
+    <h1 class="mt-5 mb-3">Compose</h1>
+    
     <form class="" action="/compose" method="post">
       <div class="form-group mt-5">
         <label>Title</label>
@@ -26,4 +16,5 @@
       </div>
       <button class="btn btn-primary" type="submit" name="button" onclick="logHtmlContent()">Publish</button>
     </form>
+    
 <%- include("partials/footer"); -%>
